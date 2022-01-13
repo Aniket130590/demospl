@@ -21,8 +21,8 @@ def generate_table(dataframe, max_rows=100):
         ]) for i in range(min(len(dataframe), max_rows))]
     )
 
-api = dash.Dash()
-api.layout = html.Div(
+app = dash.Dash()
+app.layout = html.Div(
     children=[html.H4(children='Denied Party Screening'),
     dcc.Dropdown(
         id='dropdown',
@@ -41,10 +41,10 @@ api.layout = html.Div(
 ])
 
 
-#@api.callback(dash.dependencies.Output('table-container', 'children'),
+#@app.callback(dash.dependencies.Output('table-container', 'children'),
    # [dash.dependencies.Input('dropdown', 'value')])
 
-@api.callback(dash.dependencies.Output('table-container', 'children'),
+@app.callback(dash.dependencies.Output('table-container', 'children'),
     [dash.dependencies.Input('dropdown', 'value'),
      dash.dependencies.Input('dropdown2', 'value')])
 
@@ -91,4 +91,4 @@ def display_table(dropdown_value,dropdown_value2):
     return generate_table(dff2)
 
 if __name__ == '__main__':
-    api.run_server()
+    app.run_server()
